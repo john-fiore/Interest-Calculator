@@ -1,5 +1,6 @@
 import os
 import webbrowser as wb
+from typing import Union
 
 # Basic app info - displayed in title (see line 13)
 title = "Interest Calculator"
@@ -9,15 +10,17 @@ repos = "https://github.com/john-fiore/Interest-Calculator"
 
 clear = lambda: os.system('cls')
 
+combo = Union[int, float]
+
 def init():
     os.system('color 0A') # sets terminal colors. 0 = Black BG, A = Lime Green FG.
-    os.system(f'title {title} (v{versn}) - {authr}')
+    os.system(f'title {title} (v{versn}) - by {authr}')
 
-def calculate(principle: int, rate: int, time: int):
+def calculate(principle: combo, rate: combo, time: combo):
     clear()
 
     ratedec = round(rate / 100, 2)
-    interest = principle * ratedec * time
+    interest = round(principle * ratedec * time, 2)
     
     clear()
     print(f"Total Interest of ${interest}")
@@ -55,9 +58,9 @@ def main():
 
     if choice == "1":
         clear()
-        p = int(input("P: "))
-        r = int(input("R: "))
-        t = int(input("T: "))
+        p = float(input("P: "))
+        r = float(input("R: "))
+        t = float(input("T: "))
         calculate(p, r, t)
     elif choice == "2":
         printHowto()
